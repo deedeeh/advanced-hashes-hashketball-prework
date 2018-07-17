@@ -294,7 +294,7 @@ def long_name_steals_a_ton?
         data.each do |player, stats| 
           if player_with_longest_name && stats[:steals] > max
             max = stats[:steals]
-            result = true
+            rtrue
           else 
             result = false
           end
