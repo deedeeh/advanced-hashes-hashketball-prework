@@ -295,7 +295,7 @@ def long_name_steals_a_ton?
           binding.pry
           if player_with_longest_name && stats[:steals] > max
             binding.pry
-            max = player[:steals]
+            max = stats[:steals]
             result = true
           else 
             result = false
