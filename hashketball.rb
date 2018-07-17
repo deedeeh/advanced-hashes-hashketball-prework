@@ -294,7 +294,6 @@ def long_name_steals_a_ton?
         data.each do |player, stats| 
           binding.pry
           if player_with_longest_name && stats[:steals] > max
-            binding.pry
             max = stats[:steals]
             result = true
           else 
