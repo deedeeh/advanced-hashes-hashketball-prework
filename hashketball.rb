@@ -208,21 +208,109 @@ def player_stats(player_name)
 end
 
 def big_shoe_rebounds
+  big_shoe = nil
+  max = 0
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
       if attribute == :players
         data.each do |player, stats| 
-          max = 0
           stats.each do |k, v|
             if k == :shoe && v > max 
-              return stats[:rebounds]
+              max = v
+              big_shoe = stats[:rebounds]
             end
           end
         end
       end
     end
   end
+  big_shoe
 end
+
+def most_points_scored
+  player_name = nil
+  max = 0
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats| 
+          stats.each do |k, v|
+            if k == :points && v > max 
+              max = v
+              player_name = player
+            end
+          end
+        end
+      end
+    end
+  end
+  player_name
+end
+
+def winning_team
+  winning_team = nil
+  max = 0
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats| 
+          stats.each do |k, v|
+            if k == :points && v > max 
+              max += v
+              winning_team = team_data[:team_name]
+            end
+          end
+        end
+      end
+    end
+  end
+  winning_team
+end
+
+def player_with_longest_name
+  longest_name = nil
+  max = 0
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats| 
+          if player.length > max 
+            max = player.length
+            longest_name = player
+          end
+        end
+      end
+    end
+  end
+  longest_name
+end
+
+def long_name_steals_a_ton?
+  result = nil
+  max = 0
+   game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |player, stats| 
+          if player_with_longest_name && player[:steals] > max
+            binding.pry
+            max = player[:steals]
+            result = true
+          else 
+            result = false
+          end
+        end
+      end
+    end
+  end
+  result 
+end
+
+
+
+
+
+
 
 
 
